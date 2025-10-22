@@ -99,7 +99,7 @@ class WebServer:
             """健康检查"""
             return {"status": "healthy", "timestamp": time.time()}
     
-    def run(self, host: str = "0.0.0.0", port: int = 8000):
+    def run(self, host: str = "0.0.0.0", port: int = 5002):
         """运行Web服务器"""
         uvicorn.run(self.app, host=host, port=port)
 
