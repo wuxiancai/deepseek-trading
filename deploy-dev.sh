@@ -90,7 +90,7 @@ create_dev_scripts() {
 
 # 启动交易机器人
 source venv/bin/activate
-python run.py --mode bot --log-level info
+python run.py --mode bot --log-level INFO
 EOF
     
     # 启动Web服务器
@@ -99,7 +99,7 @@ EOF
 
 # 启动Web服务器
 source venv/bin/activate
-python run.py --mode web --host 0.0.0.0 --port 8001 --log-level info
+python run.py --mode web --host 0.0.0.0 --port 8001 --log-level INFO
 EOF
     
     # 同时启动两者
@@ -108,7 +108,7 @@ EOF
 
 # 同时启动交易机器人和Web服务器
 source venv/bin/activate
-python run.py --mode both --host 0.0.0.0 --port 8001 --log-level info
+python run.py --mode both --host 0.0.0.0 --port 8001 --log-level INFO
 EOF
     
     # 停止脚本
