@@ -1,0 +1,53 @@
+# 核心依赖
+ccxt==4.2.72
+websockets==12.0
+python-binance==1.0.19
+
+# Web框架
+fastapi==0.104.1
+uvicorn==0.24.0
+jinja2==3.1.2
+
+# 数据处理和分析
+pandas==2.1.3
+numpy==1.26.2
+ta-lib==0.4.27
+
+# 技术指标计算
+ta==0.11.0
+
+# 配置管理
+python-json-logger==2.0.7
+python-dotenv==1.0.0
+
+# 数据库
+sqlalchemy==2.0.23
+aiosqlite==0.19.0
+
+# 异步处理
+asyncio==3.4.3
+concurrent-log-handler==0.9.20
+
+# 监控和日志
+loguru==0.7.2
+prometheus-client==0.19.0
+
+# 工具库
+requests==2.31.0
+aiohttp==3.9.1
+python-dateutil==2.8.2
+pytz==2023.3.post1
+
+# 测试
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# 部署相关
+gunicorn==21.2.0
+supervisor==4.2.5
+
+# 其他
+pyyaml==6.0.1
+cryptography==41.0.7
+hmac==0.0.0
+hashlib==20081119
