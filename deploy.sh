@@ -142,4 +142,5 @@ stdout_logfile_backups=10
 stderr_logfile=$LOG_DIR/trading-bot-error.log
 stderr_logfile_maxbytes=10MB
 stderr_logfile_backups=10
-environment=PYTHONPATH=\
+environment=PYTHONPATH="$PROJECT_DIR/src"
+EOF

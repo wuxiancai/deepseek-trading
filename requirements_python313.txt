@@ -1,3 +1,6 @@
+# Python 3.13 兼容的依赖配置
+# 针对Python 3.13.7优化的版本要求
+
 # 核心依赖
 ccxt>=4.2.72
 websockets>=12.0
@@ -47,3 +50,9 @@ gunicorn>=21.2.0
 # 其他
 pyyaml>=6.0.1
 cryptography>=41.0.7
+
+# Python 3.13 特定兼容性修复
+# 以下包可能需要从源码安装或使用特定版本
+# 如果遇到问题，可以尝试:
+# pip install --pre --upgrade some-package
+# 或者从GitHub安装开发版本
