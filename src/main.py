@@ -28,7 +28,9 @@ class TradingBot:
         try:
             self.config_loader.load_config()
         except Exception as e:
-            self.logger.warning(f"配置加载失败: {e}")
+            self.logger.error(f"配置加载失败: {e}")
+            # 配置加载失败时创建空的配置，避免后续错误
+            self.config_loader.config = {}
         
         self.trading_engine = TradingEngine(self.config_loader)
         

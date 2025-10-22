@@ -23,7 +23,7 @@ class SimulatedBinanceClient:
             config_loader: 配置加载器实例
         """
         self.config_loader = config_loader
-        self.config = config_loader.get_config()
+        self.config = config_loader.get_config() or {}
         self.trading_mode_config = self.config.get('trading_mode', {})
         
         # 模拟账户数据
@@ -344,7 +344,7 @@ class SimulatedBinanceClient:
 
 def get_client(config_loader: ConfigLoader):
     """获取交易客户端实例（模拟或真实）"""
-    config = config_loader.get_config()
+    config = config_loader.get_config() or {}
     trading_mode = config.get('trading_mode', {}).get('mode', 'simulated')
     
     if trading_mode == 'simulated':

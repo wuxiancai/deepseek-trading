@@ -1,183 +1,26 @@
 {
-  // ==================== 交易模式配置 ====================
   "trading_mode": {
-    "mode": "hybrid", // 交易模式: simulated(模拟) | testnet(测试网) | live(实盘) | hybrid(混合)
-    "initial_balance": 1000.0, // 模拟交易初始资金(USDT)
-    "simulated_price": 50000.0, // 模拟交易初始价格
-    "price_volatility": 0.02, // 模拟价格波动率
-    "enable_price_simulation": false // 是否启用价格模拟
+    "mode": "simulated",
+    "initial_balance": 1000.0
   },
-
-  // ==================== 币安API配置 ====================
   "binance": {
-    "api_key": "yHEbiLZVNTpX81Vc6UYPJpIsPFa6P461R1OVHHq7JcLs60B4GPcVSEq7Chw8OCGG", // 币安API Key
-    "api_secret": "gwbbkf4uCPTJbMH6M3QZFJ4qtkqqzasg28vVZb20nkWwe7kDCZsSRSMjidHCb3Th", // 币安API Secret
-    "testnet": true, // 是否使用测试网络，建议开发时设为true
-    "base_url": "https://fapi.binance.com", // 主网REST API地址
-    "testnet_url": "https://testnet.binancefuture.com", // 测试网REST API地址
-    "websocket_url": "wss://fstream.binance.com/ws", // 主网WebSocket地址
-    "testnet_websocket_url": "wss://stream.binancefuture.com/ws" // 测试网WebSocket地址
+    "api_key": "test",
+    "api_secret": "test"
   },
-
-  // ==================== 交易对配置 ====================
   "trading": {
-    "symbol": "BTCUSDT", // 交易对符号
-    "contract_type": "PERPETUAL", // 合约类型：永续合约
-    "leverage": 3, // 杠杆倍数，建议3-5倍控制风险
-    "position_mode": "BOTH", // 持仓模式：BOTH(双向持仓) | LONG(单向多仓) | SHORT(单向空仓)
-    "margin_type": "ISOLATED" // 保证金类型：ISOLATED(逐仓) | CROSS(全仓)
+    "symbol": "BTCUSDT"
   },
-
-  // ==================== K线配置 ====================
   "kline": {
-    "interval_5m": "5m", // 5分钟K线周期
-    "interval_15m": "15m", // 15分钟K线周期
-    "limit": 1000, // 获取K线数据的数量
-    "update_interval": 30000 // K线数据更新间隔(毫秒)
+    "intervals": ["5m"]
   },
-
-  // ==================== 技术指标参数 ====================
   "indicators": {
-    // MACD指标参数
     "macd": {
-      "fast_period": 12, // 快速EMA周期
-      "slow_period": 26, // 慢速EMA周期
-      "signal_period": 9, // 信号线周期
-      "threshold_buy": 0.2, // 买入信号阈值(DIFF > DEA + threshold)
-      "threshold_sell": -0.2 // 卖出信号阈值(DIFF < DEA - threshold)
+      "fast_period": 12,
+      "slow_period": 26,
+      "signal_period": 9
     },
-
-    // RSI指标参数
     "rsi": {
-      "period": 14, // RSI计算周期
-      "overbought": 70, // 超买区域阈值
-      "oversold": 30, // 超卖区域阈值
-      "neutral_upper": 60, // 中性区域上界
-      "neutral_lower": 40 // 中性区域下界
-    },
-
-    // 布林带指标参数
-    "bollinger": {
-      "period": 20, // 布林带计算周期
-      "std_dev": 2, // 标准差倍数
-      "band_width_threshold": 0.1, // 布林带宽度阈值(避免震荡市开仓)
-      "position_threshold": 0.7 // 价格位置阈值(0.7表示在上轨70%位置)
+      "period": 14
     }
-  },
-
-  // ==================== 交易策略参数 ====================
-  "strategy": {
-    "name": "MultiIndicatorReversal", // 策略名称
-    "enabled": true, // 是否启用策略
-    
-    // 多仓开仓条件
-    "long_entry": {
-      "macd_bullish": true, // MACD金叉
-      "rsi_oversold": true, // RSI超卖(<30)
-      "bollinger_lower": true, // 价格接近布林带下轨
-      "volume_increase": true // 成交量放大
-    },
-
-    // 多仓平仓条件
-    "long_exit": {
-      "macd_bearish": true, // MACD死叉
-      "rsi_overbought": true, // RSI超买(>70)
-      "bollinger_upper": true, // 价格接近布林带上轨
-      "profit_target": 0.03, // 止盈目标：3%
-      "stop_loss": -0.02 // 止损目标：-2%
-    },
-
-    // 空仓开仓条件
-    "short_entry": {
-      "macd_bearish": true, // MACD死叉
-      "rsi_overbought": true, // RSI超买(>70)
-      "bollinger_upper": true, // 价格接近布林带上轨
-      "volume_increase": true // 成交量放大
-    },
-
-    // 空仓平仓条件
-    "short_exit": {
-      "macd_bullish": true, // MACD金叉
-      "rsi_oversold": true, // RSI超卖(<30)
-      "bollinger_lower": true, // 价格接近布林带下轨
-      "profit_target": 0.03, // 止盈目标：3%
-      "stop_loss": -0.02 // 止损目标：-2%
-    },
-
-    // 震荡市过滤条件
-    "filter": {
-      "min_band_width": 0.05, // 最小布林带宽度(避免窄幅震荡)
-      "max_trade_frequency": 6, // 最大交易频率(次/小时)
-      "min_trend_strength": 0.3, // 最小趋势强度
-      "volatility_threshold": 0.01 // 波动率阈值
-    }
-  },
-
-  // ==================== 风险管理参数 ====================
-  "risk_management": {
-    "max_drawdown": 0.1, // 最大回撤限制：10%
-    "daily_max_loss": 0.05, // 单日最大亏损：5%
-    "position_size": 0.1, // 单次开仓资金比例：10%
-    "max_position_size": 0.3, // 最大持仓资金比例：30%
-    "trailing_stop": 0.015, // 移动止损比例：1.5%
-    "hedging_enabled": false // 是否启用对冲
-  },
-
-  // ==================== 手续费配置 ====================
-  "fees": {
-    "maker": 0.00027, // Maker手续费：0.027%
-    "taker": 0.0005, // Taker手续费：0.05%
-    "funding_rate_interval": 8 // 资金费率收取间隔(小时)
-  },
-
-  // ==================== 交易执行参数 ====================
-  "execution": {
-    "order_type": "LIMIT", // 订单类型：LIMIT(限价) | MARKET(市价)
-    "time_in_force": "GTC", // 订单有效期：GTC(成交为止) | IOC(立即成交或取消)
-    "price_precision": 2, // 价格精度
-    "quantity_precision": 3, // 数量精度
-    "slippage": 0.001, // 滑点容忍度：0.1%
-    "requote_count": 3, // 重新报价次数
-    "requote_delay": 1000 // 重新报价延迟(毫秒)
-  },
-
-  // ==================== 监控和日志配置 ====================
-  "monitoring": {
-    "webserver_port": 8080, // Web服务器端口
-    "webserver_host": "0.0.0.0", // Web服务器监听地址
-    "log_level": "INFO", // 日志级别：DEBUG | INFO | WARNING | ERROR
-    "log_file": "logs/trading.log", // 日志文件路径
-    "performance_interval": 60, // 性能统计间隔(秒)
-    "health_check_interval": 30 // 健康检查间隔(秒)
-  },
-
-  // ==================== 数据库配置 ====================
-  "database": {
-    "enabled": true, // 是否启用数据库
-    "type": "sqlite", // 数据库类型：sqlite | mysql | postgresql
-    "path": "data/trading.db", // SQLite数据库文件路径
-    "backup_interval": 3600, // 数据库备份间隔(秒)
-    "retention_days": 30 // 数据保留天数
-  },
-
-  // ==================== 通知配置 ====================
-  "notifications": {
-    "email_enabled": false, // 是否启用邮件通知
-    "email_server": "smtp.gmail.com", // 邮件服务器
-    "email_port": 587, // 邮件服务器端口
-    "email_username": "your_email@gmail.com", // 邮箱用户名
-    "email_password": "your_email_password", // 邮箱密码
-    "telegram_enabled": false, // 是否启用Telegram通知
-    "telegram_bot_token": "your_bot_token", // Telegram机器人Token
-    "telegram_chat_id": "your_chat_id" // Telegram聊天ID
-  },
-
-  // ==================== 系统配置 ====================
-  "system": {
-    "loop_interval": 5, // 主循环执行间隔(秒)
-    "timeout": 30, // 请求超时时间(秒)
-    "retry_count": 3, // 失败重试次数
-    "heartbeat_interval": 10, // 心跳检测间隔(秒)
-    "shutdown_timeout": 60 // 优雅关闭超时时间(秒)
   }
 }

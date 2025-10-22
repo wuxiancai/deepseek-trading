@@ -28,7 +28,7 @@ class TradingEngine:
             config_loader: 配置加载器实例
         """
         self.config_loader = config_loader
-        self.config = config_loader.get_config()
+        self.config = config_loader.get_config() or {}
         
         # 根据交易模式选择客户端
         trading_mode = self.config.get('trading_mode', {}).get('mode', 'simulated')
