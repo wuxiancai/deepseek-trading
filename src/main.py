@@ -165,6 +165,11 @@ def get_trading_bot() -> TradingBot:
     global trading_bot
     if trading_bot is None:
         trading_bot = TradingBot()
+        # 立即加载配置，避免在多线程环境下配置未加载的问题
+        try:
+            trading_bot.config_loader.load_config()
+        except Exception as e:
+            logging.getLogger(__name__).warning(f"配置加载失败: {e}")
     return trading_bot
 
 
