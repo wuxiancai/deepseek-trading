@@ -8,10 +8,12 @@
     "api_secret": "test"
   },
   "trading": {
-    "symbol": "BTCUSDT"
+    "symbol": "BTCUSDT",
+    "main_interval": "5m"
   },
   "kline": {
-    "intervals": ["5m"]
+    "intervals": ["5m"],
+    "history_limit": 1000
   },
   "indicators": {
     "macd": {
@@ -22,5 +24,18 @@
     "rsi": {
       "period": 14
     }
+  },
+  "risk_management": {
+    "max_drawdown": 0.1,
+    "daily_max_loss": 0.05,
+    "position_size": 0.1,
+    "max_position_size": 0.3
+  },
+  "execution": {
+    "order_type": "LIMIT",
+    "time_in_force": "GTC",
+    "price_precision": 2,
+    "quantity_precision": 3,
+    "cycle_interval": 5
   }
 }
